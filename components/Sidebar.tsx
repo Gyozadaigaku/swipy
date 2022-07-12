@@ -5,6 +5,7 @@ import { AiFillHome } from 'react-icons/ai'
 import { ImCancelCircle } from 'react-icons/im'
 
 import Discover from './Discover'
+import Footer from './Footer'
 
 const Sidebar: NextPage = () => {
   return (
@@ -26,7 +27,8 @@ const Sidebar: NextPage = () => {
           </Link>
         </div>
         <Discover />
-        SuggestedAccounts Footer
+        SuggestedAccounts
+        <Footer />
       </div>
     </div>
   )
