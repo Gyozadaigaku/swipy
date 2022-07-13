@@ -6,6 +6,7 @@ import { AiOutlineLogout } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { IoMdAdd } from 'react-icons/io'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
+import { createOrGetUser } from '../utils'
 
 const Navbar = () => {
   const user = false
@@ -26,7 +27,7 @@ const Navbar = () => {
           <div>Logged In</div>
         ) : (
           <GoogleLogin
-            onSuccess={(response) => console.log(response)}
+            onSuccess={(response) => createOrGetUser(response)}
             onError={() => console.log('Login Failed')}
           />
         )}
