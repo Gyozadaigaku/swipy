@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineCancel } from 'react-icons/md'
+import { BsFillPlayFill } from 'react-icons/bs'
 
 import { BASE_URL } from '../../utils'
 import { Media } from '../../types'
@@ -11,6 +12,19 @@ interface IProps {
 
 const Detail = ({ postDetails }: IProps) => {
   const [post, setPost] = useState(postDetails)
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+
+  const mediaRef = useRef<HTMLVideoElement>(null)
+
+  const onVideoClick = () => {
+    if (isPlaying) {
+      mediaRef?.current?.pause()
+      setIsPlaying(false)
+    } else {
+      mediaRef?.current?.play()
+      setIsPlaying(true)
+    }
+  }
 
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
@@ -23,10 +37,19 @@ const Detail = ({ postDetails }: IProps) => {
         <div className="relative">
           <div className="lg:h-[100vh] h-[60vh]">
             <video
+              ref={mediaRef}
+              onClick={onVideoClick}
               loop
               src={post?.media?.asset.url}
-              className="h-full cursor-pointer"
+              className=" h-full cursor-pointer"
             ></video>
+          </div>
+          <div className="absolute top-[45%] left-[40%]  cursor-pointer">
+            {!isPlaying && (
+              <button onClick={onVideoClick}>
+                <BsFillPlayFill className="text-white text-6xl lg:text-8xl" />
+              </button>
+            )}
           </div>
         </div>
       </div>
