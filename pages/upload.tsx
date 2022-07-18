@@ -1,17 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SanityAssetDocument } from '@sanity/client'
+import { useRouter } from 'next/router'
 import { FaCloudUploadAlt } from 'react-icons/fa'
+import { MdDelete } from 'react-icons/md'
 import axios from 'axios'
 
+import useAuthStore from '../store/authStore'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
 
 const Upload = () => {
+  const [caption, setCaption] = useState('')
+  const [topic, setTopic] = useState<String>(topics[0].name)
   const [loading, setLoading] = useState<Boolean>(false)
-  const [mediaAsset, setmediaAsset] = useState<
+  const [savingPost, setSavingPost] = useState<Boolean>(false)
+  const [mediaAsset, setMediaAsset] = useState<
     SanityAssetDocument | undefined
   >()
-  const [wrongFileType, setWrongFileType] = useState(false)
+  const [wrongFileType, setWrongFileType] = useState<Boolean>(false)
+
+  const userProfile: any = useAuthStore((state) => state.userProfile)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!userProfile) router.push('/')
+  }, [userProfile, router])
 
   const uploadMedia = async (e: any) => {
     const selectedFile = e.target.files[0]
@@ -36,12 +49,40 @@ const Upload = () => {
           filename: selectedFile.name,
         })
         .then((data) => {
-          setmediaAsset(data)
+          setMediaAsset(data)
           setLoading(false)
         })
     } else {
       setLoading(false)
       setWrongFileType(true)
+    }
+  }
+
+  const handlePost = async () => {
+    if (caption && mediaAsset?._id && topic) {
+      setSavingPost(true)
+
+      const doc = {
+        _type: 'post',
+        caption,
+        media: {
+          _type: 'file',
+          asset: {
+            _type: 'reference',
+            _ref: mediaAsset?._id,
+          },
+        },
+        userId: userProfile?._id,
+        postedBy: {
+          _type: 'postedBy',
+          _ref: userProfile?._id,
+        },
+        topic,
+      }
+
+      await axios.post(`http://localhost:3000/api/post`, doc)
+
+      router.push('/')
     }
   }
 
@@ -63,14 +104,24 @@ const Upload = () => {
             ) : (
               <div>
                 {mediaAsset ? (
-                  <>
+                  <div className=" rounded-3xl w-[300px]  p-4 flex flex-col gap-6 justify-center items-center">
                     <video
                       className="rounded-xl h-[462px] mt-16 bg-black"
                       controls
                       loop
-                      src={mediaAsset.url}
+                      src={mediaAsset?.url}
                     />
-                  </>
+                    <div className=" flex justify-between gap-20">
+                      <p className="text-lg">{mediaAsset.originalFilename}</p>
+                      <button
+                        type="button"
+                        className=" rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                        onClick={() => setMediaAsset(undefined)}
+                      >
+                        <MdDelete />
+                      </button>
+                    </div>
+                  </div>
                 ) : (
                   <label className="cursor-pointer">
                     <div className="flex flex-col items-center justify-center h-full">
@@ -114,14 +165,16 @@ const Upload = () => {
           <label className="text-md font-medium ">Caption</label>
           <input
             type="text"
-            value=""
-            onChange={() => {}}
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
             className="rounded lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2"
           />
           <label className="text-md font-medium ">Choose a topic</label>
 
           <select
-            onChange={() => {}}
+            onChange={(e) => {
+              setTopic(e.target.value)
+            }}
             className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
           >
             {topics.map((item) => (
@@ -136,14 +189,14 @@ const Upload = () => {
           </select>
           <div className="flex gap-6 mt-10">
             <button
-              onClick={() => {}}
+              onChange={() => {}}
               type="button"
               className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
               Discard
             </button>
             <button
-              onClick={() => {}}
+              onClick={handlePost}
               type="button"
               className="bg-[#F51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
