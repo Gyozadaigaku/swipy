@@ -102,6 +102,11 @@ const Upload = () => {
                 )}
               </div>
             )}
+            {wrongFileType && (
+              <p className="text-center text-xl text-red-400 font-semibold mt-4 w-[260px]">
+                Please select a correct file
+              </p>
+            )}
           </div>
         </div>
       </div>
