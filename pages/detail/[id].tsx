@@ -24,7 +24,7 @@ const Detail = ({ postDetails }: IProps) => {
           <div className="lg:h-[100vh] h-[60vh]">
             <video
               loop
-              src={post?.video?.asset.url}
+              src={post?.media?.asset.url}
               className="h-full cursor-pointer"
             ></video>
           </div>
