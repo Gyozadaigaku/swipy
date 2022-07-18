@@ -1,8 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+
 import MediaCard from '../components/MediaCard'
-import NoResults from '../components/NoResults'
+import { BASE_URL } from '../utils'
 import { Media } from '../types'
+import NoResults from '../components/NoResults'
 
 interface IProps {
   medias: Media[]
@@ -25,7 +27,7 @@ const Home = ({ medias }: IProps) => {
 }
 
 export const getServerSideProps = async () => {
-  const { data } = await axios.get(`http://localhost:3000/api/post`)
+  const { data } = await axios.get(`${BASE_URL}/api/post`)
 
   return {
     props: { medias: data },
