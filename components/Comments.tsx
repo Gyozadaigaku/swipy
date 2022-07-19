@@ -7,10 +7,29 @@ import useAuthStore from '../store/authStore'
 import NoResults from './NoResults'
 import { IUser } from '../types'
 
-const Comments = () => {
+interface IProps {
+  isPostingComment: Boolean
+  comment: string
+  setComment: Dispatch<SetStateAction<string>>
+  addComment: (e: React.FormEvent) => void
+  comments: IComment[]
+}
+
+interface IComment {
+  comment: string
+  length?: number
+  _key: string
+  postedBy: { _ref?: string; _id?: string }
+}
+
+const Comments = ({
+  comment,
+  setComment,
+  addComment,
+  comments,
+  isPostingComment,
+}: IProps) => {
   const { userProfile }: any = useAuthStore()
-  const comments = []
-  const isPostingComment = false
 
   return (
     <div className="border-t-2 border-gray-200 pt-4 px-10 mt-4 bg-[#F8F8F8] border-b-2 lg:pb-0 pb-[100px]">
