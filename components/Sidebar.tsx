@@ -4,10 +4,14 @@ import Link from 'next/link'
 import { AiFillHome } from 'react-icons/ai'
 import { ImCancelCircle } from 'react-icons/im'
 
+import SuggestedAccounts from './SuggestedAccounts'
 import Discover from './Discover'
 import Footer from './Footer'
+import useAuthStore from '../store/authStore'
 
 const Sidebar: NextPage = () => {
+  const { fetchAllUsers, allUsers }: any = useAuthStore()
+
   return (
     <div>
       <div className="block xl:hidden m-2 ml-4 mt-3 text-xl">
@@ -27,7 +31,7 @@ const Sidebar: NextPage = () => {
           </Link>
         </div>
         <Discover />
-        SuggestedAccounts
+        <SuggestedAccounts fetchAllUsers={fetchAllUsers} allUsers={allUsers} />
         <Footer />
       </div>
     </div>
