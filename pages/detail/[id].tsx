@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import { GoVerified } from 'react-icons/go'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,6 +8,8 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
 
 import { BASE_URL } from '../../utils'
+import LikeButton from '../../components/LikeButton'
+import useAuthStore from '../../store/authStore'
 import { Media } from '../../types'
 import axios from 'axios'
 
@@ -20,6 +23,9 @@ const Detail = ({ postDetails }: IProps) => {
   const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
+  const router = useRouter()
+
+  const { userProfile }: any = useAuthStore()
 
   const onVideoClick = () => {
     if (isPlaying) {
@@ -36,6 +42,17 @@ const Detail = ({ postDetails }: IProps) => {
       videoRef.current.muted = isVideoMuted
     }
   }, [post, isVideoMuted])
+
+  const handleLike = async (like: boolean) => {
+    if (userProfile) {
+      const res = await axios.put(`${BASE_URL}/api/like`, {
+        userId: userProfile._id,
+        postId: post._id,
+        like,
+      })
+      setPost({ ...post, likes: res.data.likes })
+    }
+  }
 
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
@@ -97,7 +114,16 @@ const Detail = ({ postDetails }: IProps) => {
             <div className="px-10">
               <p className=" text-md text-gray-600">{post.caption}</p>
             </div>
-            <div className="mt-10 px-10"></div>
+            <div className="mt-10 px-10">
+              {userProfile && (
+                <LikeButton
+                  likes={post.likes}
+                  flex="flex"
+                  handleLike={() => handleLike(true)}
+                  handleDislike={() => handleLike(false)}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
