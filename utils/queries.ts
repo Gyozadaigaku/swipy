@@ -57,3 +57,9 @@ export const postDetailQuery = (postId: string | string[]) => {
   }`
   return query
 }
+
+export const allUsersQuery = () => {
+  const query = `*[_type == "user"]`
+
+  return query
+}
