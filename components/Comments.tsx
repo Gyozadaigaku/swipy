@@ -10,6 +10,7 @@ import { IUser } from '../types'
 const Comments = () => {
   const { userProfile }: any = useAuthStore()
   const comments = []
+  const isPostingComment = false
 
   return (
     <div className="border-t-2 border-gray-200 pt-4 px-10 mt-4 bg-[#F8F8F8] border-b-2 lg:pb-0 pb-[100px]">
@@ -30,7 +31,7 @@ const Comments = () => {
               placeholder="Add comment.."
             />
             <button className="text-md text-gray-400 " onClick={() => {}}>
-              Comment
+              {isPostingComment ? 'Commenting...' : 'Comment'}
             </button>
           </form>
         </div>
