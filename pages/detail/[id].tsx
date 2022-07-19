@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineCancel } from 'react-icons/md'
 import { BsFillPlayFill } from 'react-icons/bs'
+import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
 
 import { BASE_URL } from '../../utils'
 import { Media } from '../../types'
@@ -13,18 +14,25 @@ interface IProps {
 const Detail = ({ postDetails }: IProps) => {
   const [post, setPost] = useState(postDetails)
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false)
 
-  const mediaRef = useRef<HTMLVideoElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const onVideoClick = () => {
     if (isPlaying) {
-      mediaRef?.current?.pause()
+      videoRef?.current?.pause()
       setIsPlaying(false)
     } else {
-      mediaRef?.current?.play()
+      videoRef?.current?.play()
       setIsPlaying(true)
     }
   }
+
+  useEffect(() => {
+    if (post && videoRef?.current) {
+      videoRef.current.muted = isVideoMuted
+    }
+  }, [post, isVideoMuted])
 
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
@@ -37,7 +45,7 @@ const Detail = ({ postDetails }: IProps) => {
         <div className="relative">
           <div className="lg:h-[100vh] h-[60vh]">
             <video
-              ref={mediaRef}
+              ref={videoRef}
               onClick={onVideoClick}
               loop
               src={post?.media?.asset.url}
@@ -48,6 +56,17 @@ const Detail = ({ postDetails }: IProps) => {
             {!isPlaying && (
               <button onClick={onVideoClick}>
                 <BsFillPlayFill className="text-white text-6xl lg:text-8xl" />
+              </button>
+            )}
+          </div>
+          <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
+            {isVideoMuted ? (
+              <button onClick={() => setIsVideoMuted(false)}>
+                <HiVolumeOff className="text-white text-3xl lg:text-4xl" />
+              </button>
+            ) : (
+              <button onClick={() => setIsVideoMuted(true)}>
+                <HiVolumeUp className="text-white text-3xl lg:text-4xl" />
               </button>
             )}
           </div>
