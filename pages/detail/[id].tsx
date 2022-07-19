@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { GoVerified } from 'react-icons/go'
+import Image from 'next/image'
+import Link from 'next/link'
 import { MdOutlineCancel } from 'react-icons/md'
 import { BsFillPlayFill } from 'react-icons/bs'
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
@@ -59,16 +62,42 @@ const Detail = ({ postDetails }: IProps) => {
               </button>
             )}
           </div>
-          <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
-            {isVideoMuted ? (
-              <button onClick={() => setIsVideoMuted(false)}>
-                <HiVolumeOff className="text-white text-3xl lg:text-4xl" />
-              </button>
-            ) : (
-              <button onClick={() => setIsVideoMuted(true)}>
-                <HiVolumeUp className="text-white text-3xl lg:text-4xl" />
-              </button>
-            )}
+        </div>
+        <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
+          {isVideoMuted ? (
+            <button onClick={() => setIsVideoMuted(false)}>
+              <HiVolumeOff className="text-white text-3xl lg:text-4xl" />
+            </button>
+          ) : (
+            <button onClick={() => setIsVideoMuted(true)}>
+              <HiVolumeUp className="text-white text-3xl lg:text-4xl" />
+            </button>
+          )}
+        </div>
+        <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
+          <div className="lg:mt-20 mt-10">
+            <Link href="/">
+              <div className="flex gap-4 mb-4 bg-white w-full pl-10 cursor-pointer">
+                <Image
+                  width={60}
+                  height={60}
+                  alt="user-profile"
+                  className="rounded-full"
+                  src={post.postedBy.image}
+                />
+                <div>
+                  <div className="text-xl font-bold lowercase tracking-wider flex gap-2 items-center justify-center">
+                    {post.postedBy.userName.replace(/\s+/g, '')}{' '}
+                    <GoVerified className="text-blue-400 text-xl" />
+                  </div>
+                  <p className="text-md"> {post.postedBy.userName}</p>
+                </div>
+              </div>
+            </Link>
+            <div className="px-10">
+              <p className=" text-md text-gray-600">{post.caption}</p>
+            </div>
+            <div className="mt-10 px-10"></div>
           </div>
         </div>
       </div>
