@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { GoVerified } from 'react-icons/go'
 import axios from 'axios'
 
-import VideoCard from '../../components/MediaCard'
+import MediaCard from '../../components/MediaCard'
 import NoResults from '../../components/NoResults'
 import { IUser, Media } from '../../types'
 import { BASE_URL } from '../../utils'
@@ -76,7 +76,7 @@ const Profile = ({ data }: IProps) => {
         <div className="flex gap-6 flex-wrap md:justify-start">
           {videosList.length > 0 ? (
             videosList.map((post: Media, idx: number) => (
-              <VideoCard key={idx} post={post} />
+              <MediaCard key={idx} post={post} />
             ))
           ) : (
             <NoResults

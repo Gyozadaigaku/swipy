@@ -14,7 +14,7 @@ interface IProps {
   isShowingOnHome?: boolean
 }
 
-const VideoCard: NextPage<IProps> = ({
+const MediaCard: NextPage<IProps> = ({
   post: { caption, postedBy, media, _id, likes },
   isShowingOnHome,
 }) => {
@@ -144,4 +144,4 @@ const VideoCard: NextPage<IProps> = ({
   )
 }
 
-export default VideoCard
+export default MediaCard
