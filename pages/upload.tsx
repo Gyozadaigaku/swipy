@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SanityAssetDocument } from '@sanity/client'
 import { useRouter } from 'next/router'
 import { FaCloudUploadAlt } from 'react-icons/fa'
@@ -6,9 +6,9 @@ import { MdDelete } from 'react-icons/md'
 import axios from 'axios'
 
 import useAuthStore from '../store/authStore'
+import { BASE_URL } from '../utils'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
-import { BASE_URL } from '../utils'
 
 const Upload = () => {
   const [caption, setCaption] = useState('')
@@ -87,6 +87,13 @@ const Upload = () => {
     }
   }
 
+  const handleDiscard = () => {
+    setSavingPost(false)
+    setMediaAsset(undefined)
+    setCaption('')
+    setTopic('')
+  }
+
   return (
     <div className="flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center">
       <div className=" bg-white rounded-lg xl:h-[80vh] flex gap-6 flex-wrap justify-center items-center p-14 pt-6">
@@ -104,26 +111,7 @@ const Upload = () => {
               </p>
             ) : (
               <div>
-                {mediaAsset ? (
-                  <div className=" rounded-3xl w-[300px]  p-4 flex flex-col gap-6 justify-center items-center">
-                    <video
-                      className="rounded-xl h-[462px] mt-16 bg-black"
-                      controls
-                      loop
-                      src={mediaAsset?.url}
-                    />
-                    <div className=" flex justify-between gap-20">
-                      <p className="text-lg">{mediaAsset.originalFilename}</p>
-                      <button
-                        type="button"
-                        className=" rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
-                        onClick={() => setMediaAsset(undefined)}
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                ) : (
+                {!mediaAsset ? (
                   <label className="cursor-pointer">
                     <div className="flex flex-col items-center justify-center h-full">
                       <div className="flex flex-col justify-center items-center">
@@ -152,15 +140,34 @@ const Upload = () => {
                       className="w-0 h-0"
                     />
                   </label>
+                ) : (
+                  <div className=" rounded-3xl w-[300px]  p-4 flex flex-col gap-6 justify-center items-center">
+                    <video
+                      className="rounded-xl h-[462px] mt-16 bg-black"
+                      controls
+                      loop
+                      src={mediaAsset?.url}
+                    />
+                    <div className=" flex justify-between gap-20">
+                      <p className="text-lg">{mediaAsset.originalFilename}</p>
+                      <button
+                        type="button"
+                        className=" rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                        onClick={() => setMediaAsset(undefined)}
+                      >
+                        <MdDelete />
+                      </button>
+                    </div>
+                  </div>
                 )}
               </div>
             )}
-            {wrongFileType && (
-              <p className="text-center text-xl text-red-400 font-semibold mt-4 w-[260px]">
-                Please select a correct file
-              </p>
-            )}
           </div>
+          {wrongFileType && (
+            <p className="text-center text-xl text-red-400 font-semibold mt-4 w-[260px]">
+              Please select an media file
+            </p>
+          )}
         </div>
         <div className="flex flex-col gap-3 pb-10">
           <label className="text-md font-medium ">Caption</label>
@@ -190,18 +197,19 @@ const Upload = () => {
           </select>
           <div className="flex gap-6 mt-10">
             <button
-              onChange={() => {}}
+              onClick={handleDiscard}
               type="button"
               className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
               Discard
             </button>
             <button
+              disabled={mediaAsset?.url ? false : true}
               onClick={handlePost}
               type="button"
               className="bg-[#F51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
-              Post
+              {savingPost ? 'Posting...' : 'Post'}
             </button>
           </div>
         </div>
