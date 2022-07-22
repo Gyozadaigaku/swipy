@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
+import Discover from '../components/Discover'
+import Footer from '../components/Footer'
 import '../styles/globals.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -21,14 +22,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     >
       <div className="xl:w-[100%] m-auto overflow-hidden h-[100vh]">
         <Navbar />
+        <div className="pt-8">
+          <Discover />
+        </div>
         <div className="flex gap-6 md:gap-20 px-11">
-          <div className="h-[92vh] overflow-hidden xl:hover:overflow-auto">
-            <Sidebar />
-          </div>
           <div className="mt-4 flex flex-col gap-10 overflow-auto h-[88vh] images flex-1">
             <Component {...pageProps} />
           </div>
         </div>
+        <Footer />
       </div>
     </GoogleOAuthProvider>
   )
