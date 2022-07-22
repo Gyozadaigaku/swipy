@@ -14,7 +14,7 @@ const Home = ({ medias }: IProps) => {
   console.log(medias)
 
   return (
-    <div className="flex flex-col gap-10 videos h-full">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(270px,_1fr))] gap-10 videos h-full">
       {medias.length ? (
         medias?.map((media: Media) => (
           <MediaCard post={media} isShowingOnHome key={media._id} />
