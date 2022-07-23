@@ -14,6 +14,14 @@ interface IProps {
   isShowingOnHome?: boolean
 }
 
+const isVideoExt = (fileName: string): boolean => {
+  fileName = fileName.substring(fileName.lastIndexOf('.'))
+  if (fileName.toUpperCase().match(/\.(mp4)$/i)) {
+    return true
+  }
+  return false
+}
+
 const MediaCard: NextPage<IProps> = ({
   post: { caption, postedBy, media, _id, likes },
   isShowingOnHome,
@@ -67,43 +75,57 @@ const MediaCard: NextPage<IProps> = ({
   return (
     <div>
       <div className="flex gap-4 relative">
-        <div
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-          className="rounded-3xl"
-        >
-          <Link href={`/detail/${_id}`}>
-            <video
-              loop
-              ref={videoRef}
-              src={media.asset.url}
-              className="lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
-            ></video>
-          </Link>
+        {isVideoExt(media.asset.url) ? (
+          <div
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            className="lg:w-[600px] min-h-[120px] w-[200px] relative rounded-3xl"
+          >
+            <Link href={`/detail/${_id}`}>
+              <video
+                loop
+                ref={videoRef}
+                src={media.asset.url}
+                className="lg:w-[600px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
+              ></video>
+            </Link>
 
-          {isHover && (
-            <div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[280px] p-3">
-              {playing ? (
-                <button onClick={onVideoPress}>
-                  <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
-                </button>
-              ) : (
-                <button onClick={onVideoPress}>
-                  <BsFillPlayFill className="text-black text-2xl lg:text-4xl" />
-                </button>
-              )}
-              {isVideoMuted ? (
-                <button onClick={() => setIsVideoMuted(false)}>
-                  <HiVolumeOff className="text-black text-2xl lg:text-4xl" />
-                </button>
-              ) : (
-                <button onClick={() => setIsVideoMuted(true)}>
-                  <HiVolumeUp className="text-black text-2xl lg:text-4xl" />
-                </button>
-              )}
-            </div>
-          )}
-        </div>
+            {isHover && (
+              <div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[280px] p-3">
+                {playing ? (
+                  <button onClick={onVideoPress}>
+                    <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
+                  </button>
+                ) : (
+                  <button onClick={onVideoPress}>
+                    <BsFillPlayFill className="text-black text-2xl lg:text-4xl" />
+                  </button>
+                )}
+                {isVideoMuted ? (
+                  <button onClick={() => setIsVideoMuted(false)}>
+                    <HiVolumeOff className="text-black text-2xl lg:text-4xl" />
+                  </button>
+                ) : (
+                  <button onClick={() => setIsVideoMuted(true)}>
+                    <HiVolumeUp className="text-black text-2xl lg:text-4xl" />
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="lg:w-[600px] min-h-[120px] w-[200px] relative rounded-3xl">
+            <Link href={`/detail/${_id}`}>
+              <Image
+                layout="fill"
+                objectFit="contain"
+                className="lg:w-[600px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
+                src={media.asset.url}
+                alt="user-profile"
+              />
+            </Link>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-3 p-2 cursor-pointer font-semibold rounded ">
@@ -124,6 +146,7 @@ const MediaCard: NextPage<IProps> = ({
             <p className="mt-2 font-normal ">{caption}</p>
           </Link>
         </div>
+        <div>{String(isVideoExt(media.asset.url))}</div>
       </div>
     </div>
   )
