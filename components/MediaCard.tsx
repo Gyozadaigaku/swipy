@@ -14,7 +14,7 @@ interface IProps {
   isShowingOnHome?: boolean
 }
 
-const isVideoExt = (fileName: string): boolean => {
+const isVideoExtension = (fileName: string): boolean => {
   fileName = fileName.substring(fileName.lastIndexOf('.'))
   if (fileName.toUpperCase().match(/\.(mp4)$/i)) {
     return true
@@ -75,7 +75,7 @@ const MediaCard: NextPage<IProps> = ({
   return (
     <div>
       <div className="flex gap-4 relative">
-        {isVideoExt(media.asset.url) ? (
+        {isVideoExtension(media.asset.url) ? (
           <div
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
@@ -146,7 +146,6 @@ const MediaCard: NextPage<IProps> = ({
             <p className="mt-2 font-normal ">{caption}</p>
           </Link>
         </div>
-        <div>{String(isVideoExt(media.asset.url))}</div>
       </div>
     </div>
   )
