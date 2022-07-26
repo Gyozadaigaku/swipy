@@ -4,6 +4,8 @@ export interface Media {
     asset: {
       _id: string
       url: string
+      originalFilename: string
+      size: string
     }
   }
   _id: string

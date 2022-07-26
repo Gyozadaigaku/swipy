@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
-import { GoVerified } from 'react-icons/go'
 import { BsPlay } from 'react-icons/bs'
 
 import { Media } from './../types'
@@ -23,7 +22,7 @@ const isVideoExtension = (fileName: string): boolean => {
 }
 
 const MediaCard: NextPage<IProps> = ({
-  post: { caption, postedBy, media, _id, likes },
+  post: { caption, media, _id, likes },
   isShowingOnHome,
 }) => {
   const [playing, setPlaying] = useState(false)
@@ -128,24 +127,15 @@ const MediaCard: NextPage<IProps> = ({
         )}
       </div>
 
-      <div className="flex items-center gap-3 p-2 cursor-pointer font-semibold rounded ">
-        <div className="w-6 h-6">
-          <Link href={`/profile/${postedBy?._id}`}>
-            <Image
-              width={24}
-              height={24}
-              className="rounded-full"
-              src={postedBy?.image}
-              alt="user-profile"
-              layout="responsive"
-            />
-          </Link>
-        </div>
-        <div>
-          <Link href={`/detail/${_id}`}>
-            <p className="mt-2 font-normal ">{caption}</p>
-          </Link>
-        </div>
+      <div className="p-2 cursor-pointer font-semibold rounded ">
+        <Link href={`/detail/${_id}`}>
+          <p className="break-words mt-2 font-normal">
+            {media.asset.originalFilename}
+          </p>
+        </Link>
+        <Link href={`/detail/${_id}`}>
+          <p className="break-words mt-2 font-normal">{media.asset.size}</p>
+        </Link>
       </div>
     </div>
   )

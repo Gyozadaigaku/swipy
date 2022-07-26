@@ -5,7 +5,9 @@ export const allPostsQuery = () => {
        media{
         asset->{
           _id,
-          url
+          url,
+          originalFilename,
+          size
         }
       },
       userId,
