@@ -17,11 +17,13 @@ const Discover: NextPage = () => {
     'transition-all duration-200 ease-in-out category hover:text-slate-900 px-3 py-2 rounded cursor-pointer text-sm text-slate-400 font-normal capitalize'
 
   return (
-    <ul className="flex gap-3 justify-center text-center">
+    <ul className="flex gap-3 justify-center text-center" role="tablist">
       <Link href="/" key="All">
         <li
+          aria-label="All"
           title="All"
           className={topic === undefined ? activeDiscoverItem : discoverItem}
+          role="tab"
         >
           All
         </li>
@@ -29,8 +31,10 @@ const Discover: NextPage = () => {
       {topics?.map((item) => (
         <Link href={`/?topic=${item.name}`} key={item.name}>
           <li
+            aria-label={item.name}
             title={item.name}
             className={topic === item.name ? activeDiscoverItem : discoverItem}
+            role="tab"
           >
             {item.name}
           </li>
