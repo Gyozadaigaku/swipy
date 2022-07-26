@@ -8,6 +8,8 @@ import { topics } from '../utils/constants'
 const Discover: NextPage = () => {
   const router = useRouter()
   const { topic } = router.query
+  console.log('topic')
+  console.log(topic)
 
   const activeDiscoverItem =
     'category bg-gray-100 px-3 py-2 rounded xl:rounded-full cursor-pointer text-sm text-slate-900 font-medium capitalize'
@@ -16,6 +18,14 @@ const Discover: NextPage = () => {
 
   return (
     <ul className="flex gap-3 justify-center text-center">
+      <Link href="/" key="All">
+        <li
+          title="All"
+          className={topic === undefined ? activeDiscoverItem : discoverItem}
+        >
+          All
+        </li>
+      </Link>
       {topics?.map((item) => (
         <Link href={`/?topic=${item.name}`} key={item.name}>
           <li
