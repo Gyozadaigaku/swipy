@@ -73,20 +73,20 @@ const MediaCard: NextPage<IProps> = ({
   }
 
   return (
-    <div>
+    <div className="flex flex-col pb-6">
       <div className="flex gap-4 relative">
         {isVideoExtension(media.asset.url) ? (
           <div
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className="lg:w-[600px] min-h-[120px] w-[200px] relative rounded-3xl"
+            className="rounded-3xl"
           >
             <Link href={`/detail/${_id}`}>
               <video
                 loop
                 ref={videoRef}
                 src={media.asset.url}
-                className="lg:w-[600px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
+                className="lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
               ></video>
             </Link>
 
@@ -114,11 +114,11 @@ const MediaCard: NextPage<IProps> = ({
             )}
           </div>
         ) : (
-          <div className="lg:w-[600px] min-h-[120px] w-[200px] relative rounded-3xl">
+          <div className="lg:w-[600px] w-[200px] min-w-[220px] h-[300px] md:h-[400px] lg:h-[528px] relative rounded-3xl">
             <Link href={`/detail/${_id}`}>
               <Image
                 layout="fill"
-                objectFit="contain"
+                objectFit="cover"
                 className="lg:w-[600px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
                 src={media.asset.url}
                 alt="user-profile"
