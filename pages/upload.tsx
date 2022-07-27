@@ -43,6 +43,11 @@ const Upload = () => {
     if (!userProfile) router.push('/')
   }, [userProfile, router])
 
+  useEffect(() => {
+    handlePost()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mediaAsset])
+
   const uploadMedia = async (e: any) => {
     const selectedFile = e.target.files[0]
     const fileTypes = [
@@ -76,7 +81,7 @@ const Upload = () => {
   }
 
   const handlePost = async () => {
-    if (caption && mediaAsset?._id && topic) {
+    if (mediaAsset?._id && topic) {
       setSavingPost(true)
 
       const doc = {
