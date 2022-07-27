@@ -21,6 +21,32 @@ const isVideoExtension = (fileName: string): boolean => {
   return false
 }
 
+const convertSizeUnit = (size: number) => {
+  const { target, unit } = getTargetUnit(size)
+  const newSize =
+    target !== null
+      ? Math.floor((size / target) * Math.pow(10, 2)) / Math.pow(10, 2)
+      : size
+
+  return newSize + unit
+}
+
+function getTargetUnit(size: number) {
+  const kb = 1024
+  const mb = Math.pow(kb, 2)
+  const gb = Math.pow(kb, 3)
+  const tb = Math.pow(kb, 4)
+
+  const returnData = (target: number | null, unit: string) => ({ target, unit })
+
+  if (size >= tb) return returnData(tb, 'TB')
+  if (size >= gb) return returnData(gb, 'GB')
+  if (size >= mb) return returnData(mb, 'MB')
+  if (size >= kb) return returnData(kb, 'KB')
+
+  return returnData(null, 'byte')
+}
+
 const MediaCard: NextPage<IProps> = ({
   post: { caption, media, _id, likes },
   isShowingOnHome,
@@ -134,7 +160,9 @@ const MediaCard: NextPage<IProps> = ({
           </p>
         </Link>
         <Link href={`/detail/${_id}`}>
-          <p className="break-words mt-2 font-normal">{media.asset.size}</p>
+          <p className="break-words mt-2 font-normal">
+            {convertSizeUnit(media.asset.size)}
+          </p>
         </Link>
       </div>
     </div>
