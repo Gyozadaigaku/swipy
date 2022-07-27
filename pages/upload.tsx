@@ -4,11 +4,20 @@ import { useRouter } from 'next/router'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import axios from 'axios'
+import Image from 'next/image'
 
 import useAuthStore from '../store/authStore'
 import { BASE_URL } from '../utils'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
+
+const isVideoExtension = (fileName: string): boolean => {
+  fileName = fileName.substring(fileName.lastIndexOf('.'))
+  if (fileName.toUpperCase().match(/\.(mp4)$/i)) {
+    return true
+  }
+  return false
+}
 
 const Upload = () => {
   const [caption, setCaption] = useState('')
@@ -123,7 +132,7 @@ const Upload = () => {
                 Uploading...
               </p>
             ) : (
-              <div>
+              <>
                 {!mediaAsset ? (
                   <label>
                     <div className="flex flex-col items-center justify-center h-full">
@@ -158,14 +167,25 @@ const Upload = () => {
                     />
                   </label>
                 ) : (
-                  <div className=" rounded-3xl w-[300px]  p-4 flex flex-col gap-6 justify-center items-center">
-                    <video
-                      className="rounded-xl h-[462px] mt-16 bg-black"
-                      controls
-                      loop
-                      src={mediaAsset?.url}
-                    />
-                    <div className=" flex justify-between gap-20">
+                  <div className="rounded-3xl w-[300px] p-4 flex flex-col gap-6 justify-center items-center">
+                    {isVideoExtension(mediaAsset?.url) ? (
+                      <video
+                        className="rounded-xl h-[462px] mt-16 bg-black"
+                        controls
+                        loop
+                        src={mediaAsset?.url}
+                      />
+                    ) : (
+                      <div className="rounded-xl h-[462px] mt-16 bg-black">
+                        <Image
+                          layout="fill"
+                          objectFit="cover"
+                          src={mediaAsset?.url}
+                          alt="image"
+                        />
+                      </div>
+                    )}
+                    <div className="flex justify-between gap-20">
                       <p className="text-lg">{mediaAsset.originalFilename}</p>
                       <button
                         type="button"
@@ -177,7 +197,7 @@ const Upload = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </>
             )}
           </div>
           {wrongFileType && (
