@@ -18,6 +18,14 @@ interface IProps {
   postDetails: Media
 }
 
+const isVideoExtension = (fileName: string): boolean => {
+  fileName = fileName.substring(fileName.lastIndexOf('.'))
+  if (fileName.toUpperCase().match(/\.(mp4)$/i)) {
+    return true
+  }
+  return false
+}
+
 const Detail = ({ postDetails }: IProps) => {
   const [post, setPost] = useState(postDetails)
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
@@ -87,34 +95,49 @@ const Detail = ({ postDetails }: IProps) => {
             </div>
             <div className="relative">
               <div className="lg:h-[100vh] h-[60vh]">
-                <video
-                  ref={videoRef}
-                  onClick={onVideoClick}
-                  loop
-                  src={post?.media?.asset.url}
-                  className=" h-full cursor-pointer"
-                ></video>
+                {isVideoExtension(post?.media?.asset.url) ? (
+                  <video
+                    ref={videoRef}
+                    onClick={onVideoClick}
+                    loop
+                    src={post?.media?.asset.url}
+                    className="h-full cursor-pointer"
+                  ></video>
+                ) : (
+                  <div className="h-full cursor-pointer w-[1000px] lg:w-[calc(100%_-_w-9/12)]">
+                    <Image
+                      layout="fill"
+                      objectFit="cover"
+                      src={post?.media?.asset.url}
+                      alt="image"
+                    />
+                  </div>
+                )}
               </div>
 
-              <div className="absolute top-[45%] left-[40%]  cursor-pointer">
-                {!isPlaying && (
-                  <button onClick={onVideoClick}>
-                    <BsFillPlayFill className="text-white text-6xl lg:text-8xl" />
+              {isVideoExtension(post?.media?.asset.url) && (
+                <div className="absolute top-[45%] left-[40%]  cursor-pointer">
+                  {!isPlaying && (
+                    <button onClick={onVideoClick}>
+                      <BsFillPlayFill className="text-white text-6xl lg:text-8xl" />
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+            {isVideoExtension(post?.media?.asset.url) && (
+              <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
+                {isVideoMuted ? (
+                  <button onClick={() => setIsVideoMuted(false)}>
+                    <HiVolumeOff className="text-white text-3xl lg:text-4xl" />
+                  </button>
+                ) : (
+                  <button onClick={() => setIsVideoMuted(true)}>
+                    <HiVolumeUp className="text-white text-3xl lg:text-4xl" />
                   </button>
                 )}
               </div>
-            </div>
-            <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
-              {isVideoMuted ? (
-                <button onClick={() => setIsVideoMuted(false)}>
-                  <HiVolumeOff className="text-white text-3xl lg:text-4xl" />
-                </button>
-              ) : (
-                <button onClick={() => setIsVideoMuted(true)}>
-                  <HiVolumeUp className="text-white text-3xl lg:text-4xl" />
-                </button>
-              )}
-            </div>
+            )}
           </div>
           <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
             <div className="lg:mt-20 mt-10">
