@@ -129,7 +129,10 @@ const Upload = () => {
                     <div className="flex flex-col items-center justify-center h-full">
                       <div className="flex flex-col justify-center items-center">
                         <p className="font-bold text-xl">
-                          <FaCloudUploadAlt className="text-gray-300 text-6xl" />
+                          <FaCloudUploadAlt
+                            aria-label="upload file"
+                            className="text-gray-300 text-6xl"
+                          />
                         </p>
                         <p className="text-center text-xl font-semibold">
                           Select media to upload
@@ -147,6 +150,7 @@ const Upload = () => {
                       </p>
                     </div>
                     <input
+                      aria-label="upload file"
                       type="file"
                       name="upload-media"
                       onChange={(e) => uploadMedia(e)}
