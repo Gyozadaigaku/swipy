@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SanityAssetDocument } from '@sanity/client'
 import { useRouter } from 'next/router'
 import { FaCloudUploadAlt } from 'react-icons/fa'
@@ -22,6 +22,13 @@ const Upload = () => {
 
   const userProfile: any = useAuthStore((state) => state.userProfile)
   const router = useRouter()
+
+  const fileWrapperRef = useRef<HTMLDivElement>(null)
+  const dragover = ['border-red-300', 'bg-gray-100']
+  const onDragEnter = () => fileWrapperRef?.current?.classList.add(...dragover)
+  const onDragLeave = () =>
+    fileWrapperRef?.current?.classList.remove(...dragover)
+  const onDrop = () => fileWrapperRef?.current?.classList.remove(...dragover)
 
   useEffect(() => {
     if (!userProfile) router.push('/')
@@ -104,7 +111,13 @@ const Upload = () => {
               Post a media to your account
             </p>
           </div>
-          <div className=" border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center  outline-none mt-10 w-[260px] h-[458px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
+          <div
+            className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[458px] p-10 hover:border-red-300 hover:bg-gray-100 relative"
+            onDragEnter={onDragEnter}
+            onDragLeave={onDragLeave}
+            onDrop={onDrop}
+            ref={fileWrapperRef}
+          >
             {loading ? (
               <p className="text-center text-3xl text-red-400 font-semibold">
                 Uploading...
@@ -112,13 +125,13 @@ const Upload = () => {
             ) : (
               <div>
                 {!mediaAsset ? (
-                  <label className="cursor-pointer">
+                  <label>
                     <div className="flex flex-col items-center justify-center h-full">
                       <div className="flex flex-col justify-center items-center">
                         <p className="font-bold text-xl">
                           <FaCloudUploadAlt className="text-gray-300 text-6xl" />
                         </p>
-                        <p className="text-xl font-semibold">
+                        <p className="text-center text-xl font-semibold">
                           Select media to upload
                         </p>
                       </div>
@@ -137,7 +150,7 @@ const Upload = () => {
                       type="file"
                       name="upload-media"
                       onChange={(e) => uploadMedia(e)}
-                      className="w-0 h-0"
+                      className="absolute cursor-pointer top-0 left-0 opacity-0 w-full h-full"
                     />
                   </label>
                 ) : (
