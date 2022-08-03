@@ -5,7 +5,7 @@ export interface Media {
       _id: string
       url: string
       originalFilename: string
-      size: string
+      size: number
     }
   }
   _id: string
