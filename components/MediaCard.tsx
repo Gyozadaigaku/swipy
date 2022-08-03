@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
+import React, { useEffect, useRef, useState } from 'react'
+import VibrantColorSwatch from './VibrantColorSwatch'
+
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { BsPlay } from 'react-icons/bs'
-
+import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
 import { Media } from './../types'
+import { NextPage } from 'next'
 
 interface IProps {
   post: Media
@@ -154,6 +155,7 @@ const MediaCard: NextPage<IProps> = ({
       </div>
 
       <div className="p-2 cursor-pointer font-semibold rounded ">
+        <VibrantColorSwatch />
         <Link href={`/detail/${_id}`}>
           <p className="break-words mt-2 font-normal">
             {media.asset.originalFilename}
