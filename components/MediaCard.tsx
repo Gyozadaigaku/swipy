@@ -155,7 +155,9 @@ const MediaCard: NextPage<IProps> = ({
       </div>
 
       <div className="p-2 cursor-pointer font-semibold rounded ">
-        <VibrantColorSwatch />
+        {!isVideoExtension(media.asset.url) && (
+          <VibrantColorSwatch src={media.asset.url} />
+        )}
         <Link href={`/detail/${_id}`}>
           <p className="break-words mt-2 font-normal">
             {media.asset.originalFilename}
