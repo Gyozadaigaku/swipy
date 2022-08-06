@@ -1,24 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import Vibrant from 'node-vibrant'
+import { Palette } from 'node-vibrant/lib/color'
 
-const VibrantColorSwatch = ({ src }) => {
-  const [paletteData, setPaletteData] = useState([])
+export type SwatchLabel =
+  | 'Vibrant'
+  | 'Muted'
+  | 'DarkVibrant'
+  | 'DarkMuted'
+  | 'LightVibrant'
+  | 'LightMuted'
+
+export type ColorSwatch = {
+  swatch: SwatchLabel
+  color: string
+}
+
+export type VibrantColorSwatchProps = {
+  swatch: ColorSwatch
+}
+
+const VibrantColorSwatch: React.FC<VibrantColorSwatchProps> = ({ src }) => {
+  const [paletteData, setPaletteData] = useState<ColorSwatch[]>([])
 
   const handlePostRequest = async (src: string) => {
-    const palette = await Vibrant.from(src).getPalette()
-    for (const swatch in palette) {
-      if (palette.hasOwnProperty(swatch) && palette[swatch]) {
-        console.log(swatch, palette[swatch].getHex())
-        setPaletteData([...paletteData, palette[swatch].getHex()])
+    const palette: Palette = await Vibrant.from(src).getPalette()
+    const newPaletteData = Object.keys(palette).map((p: string): any => {
+      if (palette.hasOwnProperty(p) && palette[p]) {
+        return { swatch: p, color: palette[p]?.getHex() }
       }
-    }
+    })
+    setPaletteData(newPaletteData)
   }
 
   useEffect(() => {
     handlePostRequest(src)
-  }, [])
+  }, [src])
 
-  return <div>{paletteData[0]}</div>
+  return (
+    <ul className="flex h-8 w-full">
+      {paletteData.map((palette: ColorSwatch) => {
+        return (
+          <li
+            className="w-full"
+            key={palette.swatch}
+            style={{ background: `${palette.color}` }}
+          ></li>
+        )
+      })}
+    </ul>
+  )
 }
 
 export default VibrantColorSwatch
