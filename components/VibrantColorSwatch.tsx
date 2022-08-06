@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Tooltip from './Tooltip'
 import Vibrant from 'node-vibrant'
 import { Palette } from 'node-vibrant/lib/color'
 
@@ -19,7 +20,9 @@ export type VibrantColorSwatchProps = {
   swatch: ColorSwatch
 }
 
-const VibrantColorSwatch: React.FC<VibrantColorSwatchProps> = ({ src }) => {
+const VibrantColorSwatch: React.FC<VibrantColorSwatchProps> = ({
+  src,
+}: any) => {
   const [paletteData, setPaletteData] = useState<ColorSwatch[]>([])
 
   const handlePostRequest = async (src: string) => {
@@ -37,17 +40,21 @@ const VibrantColorSwatch: React.FC<VibrantColorSwatchProps> = ({ src }) => {
   }, [src])
 
   return (
-    <ul className="flex h-8 w-full">
+    <div className="flex h-8 w-full">
       {paletteData.map((palette: ColorSwatch) => {
         return (
-          <li
-            className="w-full"
-            key={palette.swatch}
-            style={{ background: `${palette.color}` }}
-          ></li>
+          <Tooltip key={palette.swatch} text={palette.color}>
+            <div
+              className="w-full"
+              key={palette.swatch}
+              style={{ background: `${palette.color}` }}
+            >
+              {'　'}
+            </div>
+          </Tooltip>
         )
       })}
-    </ul>
+    </div>
   )
 }
 
