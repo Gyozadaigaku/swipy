@@ -1,7 +1,8 @@
-import React from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-const Button = () => {
-  return <div>Button</div>
-}
-
-export default Button
+export const Button = forwardRef<
+  HTMLButtonElement,
+  ComponentPropsWithoutRef<'button'>
+>(function ButtonBase({ className, ...props }, ref) {
+  return <button {...props} ref={ref} className={className} />
+})

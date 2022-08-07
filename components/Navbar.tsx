@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
+import { Button } from './Button'
 
 import useAuthStore from '../store/authStore'
 import { IUser } from '../types'
@@ -65,9 +66,13 @@ const Navbar = () => {
         {user ? (
           <div className="flex items-center gap-5 md:gap-10">
             <Link href="/upload">
-              <button className="transition duration-200 h-11 rounded-full bg-[#14A3F3] text-white px-6 text-sm font-semibold hover:bg-[#148BF3]">
+              <Button
+                className={
+                  'transition duration-200 h-11 rounded-full bg-[#14A3F3] text-white px-6 text-sm font-semibold hover:bg-[#148BF3]'
+                }
+              >
                 Upload
-              </button>
+              </Button>
             </Link>
             {user.image && (
               <Link href={`/profile/${user._id}`}>
