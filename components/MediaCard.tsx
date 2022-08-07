@@ -159,7 +159,7 @@ const MediaCard: NextPage<IProps> = ({
           <VibrantColorSwatch src={media.asset.url} />
         )}
         <Link href={`/detail/${_id}`}>
-          <p className="break-words mt-2 font-normal">
+          <p className="break-words mt-2 font-normal text-ellipsis overflow-hidden whitespace-nowrap">
             {media.asset.originalFilename}
           </p>
         </Link>
