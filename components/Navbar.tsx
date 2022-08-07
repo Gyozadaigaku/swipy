@@ -63,10 +63,10 @@ const Navbar = () => {
       </div>
       <div>
         {user ? (
-          <div className="flex gap-5 md:gap-10">
+          <div className="flex items-center gap-5 md:gap-10">
             <Link href="/upload">
-              <button className="border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2">
-                <span className="hidden md:block">Upload</span>
+              <button className="transition duration-200 h-11 rounded-full bg-[#14A3F3] text-white px-6 text-sm font-semibold hover:bg-[#148BF3]">
+                Upload
               </button>
             </Link>
             {user.image && (
