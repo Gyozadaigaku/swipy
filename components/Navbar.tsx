@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
-import { Button } from './Button'
+import { Button } from './atoms/Button/Button'
 
 import useAuthStore from '../store/authStore'
 import { IUser } from '../types'
