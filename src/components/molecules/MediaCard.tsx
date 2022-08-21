@@ -6,7 +6,7 @@ import VibrantColorSwatch from './VibrantColorSwatch'
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { BsPlay } from 'react-icons/bs'
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
-import { Media } from './../types'
+import { Media } from '../../types'
 import { NextPage } from 'next'
 
 interface IProps {

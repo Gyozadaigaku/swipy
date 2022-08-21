@@ -2,10 +2,10 @@ import type { AppProps } from 'next/app'
 import { useState, useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
-import Upload from '../components/Upload'
-import Navbar from '../components/Navbar'
-import Discover from '../components/Discover'
-import Footer from '../components/Footer'
+import Upload from '../components/templates/Upload'
+import Navbar from '../components/organisms/Navbar'
+import Discover from '../components/molecules/Discover'
+import Footer from '../components/organisms/Footer'
 import '../styles/globals.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { GoVerified } from 'react-icons/go'
 import axios from 'axios'
 
-import MediaCard from '../../components/MediaCard'
-import NoResults from '../../components/NoResults'
+import MediaCard from '../../components/molecules/MediaCard'
+import NoResults from '../../components/molecules/NoResults'
 import { IUser, Media } from '../../types'
 import { BASE_URL } from '../../utils'
 

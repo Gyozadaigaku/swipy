@@ -5,12 +5,12 @@ import { useRouter } from 'next/router'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
-import { Button } from './atoms/Button/Button'
+import { Button } from '../atoms/Button/Button'
 
-import useAuthStore from '../store/authStore'
-import { IUser } from '../types'
-import { createOrGetUser } from '../utils'
-import Logo from '../utils/swipy-logo.png'
+import useAuthStore from '../../store/authStore'
+import { IUser } from '../../types'
+import { createOrGetUser } from '../../utils'
+import Logo from '../../utils/swipy-logo.png'
 
 const Navbar = () => {
   const [user, setUser] = useState<IUser | null>()
