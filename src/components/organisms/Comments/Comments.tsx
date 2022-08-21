@@ -3,9 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { GoVerified } from 'react-icons/go'
 
-import useAuthStore from '../../store/authStore'
-import NoResults from '../molecules/NoResults'
-import { IUser } from '../../types'
+import useAuthStore from '../../../store/authStore'
+import NoResults from '../../molecules/NoResults/NoResults'
+import { IUser } from '../../../types'
 
 interface IProps {
   isPostingComment: Boolean

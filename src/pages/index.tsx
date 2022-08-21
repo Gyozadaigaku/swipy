@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 
-import MediaCard from '../components/molecules/MediaCard'
+import MediaCard from '../components/molecules/MediaCard/MediaCard'
 import { BASE_URL } from '../utils'
 import { Media } from '../types'
-import NoResults from '../components/molecules/NoResults'
+import NoResults from '../components/molecules/NoResults/NoResults'
 
 interface IProps {
   medias: Media[]

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Tooltip from './Tooltip'
+import Tooltip from '../Tooltip/Tooltip'
 import Vibrant from 'node-vibrant'
 import { Palette } from 'node-vibrant/lib/color'
 

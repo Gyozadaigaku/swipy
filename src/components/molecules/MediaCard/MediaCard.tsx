@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
-import VibrantColorSwatch from './VibrantColorSwatch'
+import VibrantColorSwatch from '../VibrantColorSwatch/VibrantColorSwatch'
 
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { BsPlay } from 'react-icons/bs'
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
-import { Media } from '../../types'
+import { Media } from '../../../types'
 import { NextPage } from 'next'
 
 interface IProps {

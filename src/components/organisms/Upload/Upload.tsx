@@ -3,9 +3,9 @@ import { SanityAssetDocument } from '@sanity/client'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-import useAuthStore from '../../store/authStore'
-import { BASE_URL } from '../../utils'
-import { client } from '../../utils/client'
+import useAuthStore from '../../../store/authStore'
+import { BASE_URL } from '../../../utils'
+import { client } from '../../../utils/client'
 
 const Upload = () => {
   const [mediaAsset, setMediaAsset] = useState<

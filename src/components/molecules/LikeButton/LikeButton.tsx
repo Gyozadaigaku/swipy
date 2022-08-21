@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MdFavorite } from 'react-icons/md'
 import { NextPage } from 'next'
 
-import useAuthStore from '../../store/authStore'
+import useAuthStore from '../../../store/authStore'
 
 interface IProps {
   likes: any
