@@ -7,6 +7,7 @@ import { MdOutlineCancel } from 'react-icons/md'
 import { BsFillPlayFill } from 'react-icons/bs'
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi'
 
+import { IconButton } from '@/components/atoms/IconButton/IconButton'
 import Comments from '../../components/organisms/Comments/Comments'
 import { BASE_URL } from '../../utils'
 import LikeButton from '../../components/molecules/LikeButton/LikeButton'
@@ -118,9 +119,9 @@ const Detail = ({ postDetails }: IProps) => {
               {isVideoExtension(post?.media?.asset.url) && (
                 <div className="absolute top-[45%] left-[40%]  cursor-pointer">
                   {!isPlaying && (
-                    <button onClick={onVideoClick}>
+                    <IconButton onClick={onVideoClick}>
                       <BsFillPlayFill className="text-white text-6xl lg:text-8xl" />
-                    </button>
+                    </IconButton>
                   )}
                 </div>
               )}
@@ -128,13 +129,13 @@ const Detail = ({ postDetails }: IProps) => {
             {isVideoExtension(post?.media?.asset.url) && (
               <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
                 {isVideoMuted ? (
-                  <button onClick={() => setIsVideoMuted(false)}>
+                  <IconButton onClick={() => setIsVideoMuted(false)}>
                     <HiVolumeOff className="text-white text-3xl lg:text-4xl" />
-                  </button>
+                  </IconButton>
                 ) : (
-                  <button onClick={() => setIsVideoMuted(true)}>
+                  <IconButton onClick={() => setIsVideoMuted(true)}>
                     <HiVolumeUp className="text-white text-3xl lg:text-4xl" />
-                  </button>
+                  </IconButton>
                 )}
               </div>
             )}

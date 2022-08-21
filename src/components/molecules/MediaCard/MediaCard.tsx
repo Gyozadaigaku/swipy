@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
+import { IconButton } from '@/components/atoms/IconButton/IconButton'
 import VibrantColorSwatch from '../VibrantColorSwatch/VibrantColorSwatch'
 
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
@@ -119,22 +120,28 @@ const MediaCard: NextPage<IProps> = ({
             {isHover && (
               <div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[280px] p-3">
                 {playing ? (
-                  <button onClick={onVideoPress}>
+                  <IconButton onClick={onVideoPress} radius="rounded-full">
                     <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
-                  </button>
+                  </IconButton>
                 ) : (
-                  <button onClick={onVideoPress}>
+                  <IconButton onClick={onVideoPress} radius="rounded-full">
                     <BsFillPlayFill className="text-black text-2xl lg:text-4xl" />
-                  </button>
+                  </IconButton>
                 )}
                 {isVideoMuted ? (
-                  <button onClick={() => setIsVideoMuted(false)}>
+                  <IconButton
+                    onClick={() => setIsVideoMuted(false)}
+                    radius="rounded-full"
+                  >
                     <HiVolumeOff className="text-black text-2xl lg:text-4xl" />
-                  </button>
+                  </IconButton>
                 ) : (
-                  <button onClick={() => setIsVideoMuted(true)}>
+                  <IconButton
+                    onClick={() => setIsVideoMuted(true)}
+                    radius="rounded-full"
+                  >
                     <HiVolumeUp className="text-black text-2xl lg:text-4xl" />
-                  </button>
+                  </IconButton>
                 )}
               </div>
             )}

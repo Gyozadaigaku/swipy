@@ -6,6 +6,7 @@ import { AiOutlineLogout } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
 import { Button } from '../../atoms/Button/Button'
+import { IconButton } from '@/components/atoms/IconButton/IconButton'
 
 import useAuthStore from '../../../store/authStore'
 import { IUser } from '../../../types'
@@ -54,12 +55,13 @@ const Navbar = () => {
             className="bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full  md:top-0"
             placeholder="Search"
           />
-          <button
+          <IconButton
+            border="border-l-2 border-gray-300"
+            className="absolute md:right-5 right-6 top-4 pl-4 text-2xl text-gray-400"
             onClick={handleSearch}
-            className="absolute md:right-5 right-6 top-4 border-l-2 border-gray-300 pl-4 text-2xl text-gray-400"
           >
             <BiSearch />
-          </button>
+          </IconButton>
         </form>
       </div>
       <div>
@@ -93,16 +95,18 @@ const Navbar = () => {
                 </div>
               </Link>
             )}
-            <button
-              type="button"
-              className=" border-2 p-2 rounded-full cursor-pointer outline-none shadow-md"
+            <IconButton
+              border="border-2"
+              className="p-2"
               onClick={() => {
                 googleLogout()
                 removeUser()
               }}
+              radius="rounded-full"
+              shadow="shadow-md"
             >
               <AiOutlineLogout color="red" fontSize={21} />
-            </button>
+            </IconButton>
           </div>
         ) : (
           <GoogleLogin

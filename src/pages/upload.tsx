@@ -12,6 +12,7 @@ import { client } from '../utils/client'
 import { topics } from '../utils/constants'
 
 import { Button } from '@/components/atoms/Button/Button'
+import { IconButton } from '@/components/atoms/IconButton/IconButton'
 import { Selectbox } from '@/components/atoms/Selectbox/Selectbox'
 import { Textbox } from '@/components/atoms/Textbox/Textbox'
 
@@ -196,13 +197,13 @@ const Upload = () => {
                     )}
                     <div className="flex justify-between gap-20">
                       <p className="text-lg">{mediaAsset.originalFilename}</p>
-                      <button
-                        type="button"
-                        className=" rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                      <IconButton
+                        className="rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
                         onClick={() => setMediaAsset(undefined)}
+                        radius="rounded-full"
                       >
                         <MdDelete />
-                      </button>
+                      </IconButton>
                     </div>
                   </div>
                 )}
