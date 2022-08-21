@@ -11,6 +11,7 @@ import { BASE_URL } from '../utils'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
 
+import { Button } from '@/components/atoms/Button/Button'
 import { Selectbox } from '@/components/atoms/Selectbox/Selectbox'
 import { Textbox } from '@/components/atoms/Textbox/Textbox'
 
@@ -237,21 +238,33 @@ const Upload = () => {
             ))}
           </Selectbox>
           <div className="flex gap-6 mt-10">
-            <button
+            <Button
+              border="border-gray-300 border-2"
+              disabled={mediaAsset?.url ? false : true}
+              fontSize="text-sm"
+              fontWeight="font-semibold"
+              height="h-11"
               onClick={handleDiscard}
-              type="button"
-              className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
+              radius="rounded"
+              width="w-28 lg:w-44"
             >
               Discard
-            </button>
-            <button
+            </Button>
+            <Button
+              bgColor={'bg-[#F51997]'}
+              border="border-none"
+              color="text-white"
               disabled={mediaAsset?.url ? false : true}
+              fontSize="text-sm"
+              fontWeight="font-semibold"
+              height="h-11"
+              hoverBgColor={'hover:bg-[#F51997]'}
               onClick={handlePost}
-              type="button"
-              className="bg-[#F51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
+              radius="rounded"
+              width="w-28 lg:w-44"
             >
               {savingPost ? 'Posting...' : 'Post'}
-            </button>
+            </Button>
           </div>
         </div>
       </div>

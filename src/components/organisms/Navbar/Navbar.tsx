@@ -66,7 +66,19 @@ const Navbar = () => {
         {user ? (
           <div className="flex items-center gap-5 md:gap-10">
             <Link href="/upload">
-              <Button className={''}>Upload</Button>
+              <Button
+                bgColor={'bg-[#14A3F3]'}
+                border="border-none"
+                color="text-white"
+                fontSize="text-sm"
+                fontWeight="font-semibold"
+                height="h-11"
+                hoverBgColor={'hover:bg-[#148BF3]'}
+                radius="rounded-full"
+                width="w-28"
+              >
+                Upload
+              </Button>
             </Link>
             {user.image && (
               <Link href={`/profile/${user._id}`}>

@@ -1,14 +1,30 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
+import clsx from 'clsx'
+
+type Props = {
+  bgColor?: string
+  border?: string
+  color?: string
+  fontSize?: string
+  fontWeight?: string
+  height?: string
+  hoverBgColor?: string
+  radius?: string
+  width?: string
+}
 
 export const Button = forwardRef<
   HTMLButtonElement,
   ComponentPropsWithoutRef<'button'>
->(function ButtonBase({ className, ...props }, ref) {
+>(function ButtonBase({ ...props }: Props, ref) {
   return (
     <button
       {...props}
       ref={ref}
-      className={`transition duration-200 h-11 rounded-full bg-[#14A3F3] text-white px-6 text-sm font-semibold hover:bg-[#148BF3]`}
+      className={clsx(
+        'transition duration-200 px-6 text-sm',
+        `${props.bgColor} ${props.border} ${props.color} ${props.fontSize} ${props.fontWeight} ${props.height} ${props.hoverBgColor} ${props.radius} ${props.width}`
+      )}
     />
   )
 })
