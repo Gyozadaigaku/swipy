@@ -11,6 +11,8 @@ import { BASE_URL } from '../utils'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
 
+import { Textbox } from '@/components/atoms/Textbox/Textbox'
+
 const isVideoExtension = (fileName: string): boolean => {
   fileName = fileName.substring(fileName.lastIndexOf('.'))
   if (fileName.toUpperCase().match(/\.(mp4)$/i)) {
@@ -213,14 +215,11 @@ const Upload = () => {
         </div>
         <div className="flex flex-col gap-3 pb-10">
           <label className="text-md font-medium ">Caption</label>
-          <input
-            type="text"
+          <Textbox
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
-            className="rounded lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2"
           />
           <label className="text-md font-medium ">Choose a topic</label>
-
           <select
             onChange={(e) => {
               setTopic(e.target.value)
