@@ -11,6 +11,7 @@ import { BASE_URL } from '../utils'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
 
+import { Selectbox } from '@/components/atoms/Selectbox/Selectbox'
 import { Textbox } from '@/components/atoms/Textbox/Textbox'
 
 const isVideoExtension = (fileName: string): boolean => {
@@ -220,11 +221,10 @@ const Upload = () => {
             onChange={(e) => setCaption(e.target.value)}
           />
           <label className="text-md font-medium ">Choose a topic</label>
-          <select
+          <Selectbox
             onChange={(e) => {
               setTopic(e.target.value)
             }}
-            className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
           >
             {topics.map((item) => (
               <option
@@ -235,7 +235,7 @@ const Upload = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Selectbox>
           <div className="flex gap-6 mt-10">
             <button
               onClick={handleDiscard}
