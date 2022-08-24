@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import useOutsideAlerter from '@/components/hooks/useOutsideAlerter'
 
+import ButtonWithLeadingIcon from '@/components/molecules/ButtonWithLeadingIcon/ButtonWithLeadingIcon'
 import { MdDelete } from 'react-icons/md'
 
 const PopupMenu = () => {
@@ -26,13 +27,10 @@ const PopupMenu = () => {
         role="menu"
       >
         <li role="presentation">
-          <button
-            className=" hover:bg-gray-100 inline-flex items-center py-1 px-2 w-full"
-            onClick={() => setIsShown(false)}
-          >
-            <MdDelete className="mr-1" />
-            <span>Delete</span>
-          </button>
+          <ButtonWithLeadingIcon
+            icon={<MdDelete aria-hidden="true" className="mr-1" />}
+            label="Delete"
+          />
         </li>
       </ul>
     </div>
