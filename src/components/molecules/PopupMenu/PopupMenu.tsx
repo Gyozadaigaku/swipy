@@ -7,7 +7,7 @@ const PopupMenu = () => {
   useOutsideAlerter(wrapperRef, setIsShown)
 
   return (
-    <div className="relative">
+    <div className="relative" ref={wrapperRef}>
       <button
         aria-expanded={isShown}
         aria-haspopup="true"
@@ -22,7 +22,6 @@ const PopupMenu = () => {
         }`}
         id="menuList"
         role="menu"
-        ref={wrapperRef}
       >
         <li role="presentation">menu</li>
         <li role="presentation">
