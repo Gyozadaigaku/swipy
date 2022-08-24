@@ -18,13 +18,13 @@ const PopupMenu = () => {
         aria-haspopup="true"
         aria-controls="menuList"
         border="border-none"
-        className="absolute md:right-5 right-6 top-4 pl-4 text-2xl text-gray-400"
+        className="relative md:right-5 right-6 top-4 pl-4 text-2xl text-gray-400"
         onClick={() => setIsShown(!isShown)}
       >
         <BiDotsHorizontalRounded />
       </IconButton>
       <ul
-        className={`absolute z-[1000] origin-top-left w-40 mt-2 py-2 bg-white rounded-lg transition duration-200 shadow ring-1 ring-slate-900/5 ${
+        className={`absolute z-[1000] origin-top-right w-40 mt-2 py-2 right-0 bg-white rounded-lg transition duration-200 shadow ring-1 ring-slate-900/5 ${
           isShown ? 'scale-1' : 'scale-0'
         }`}
         id="menuList"

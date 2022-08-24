@@ -119,32 +119,37 @@ const MediaCard: NextPage<IProps> = ({
             </Link>
 
             {isHover && (
-              <div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[280px] p-3">
-                {playing ? (
-                  <IconButton onClick={onVideoPress} radius="rounded-full">
-                    <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
-                  </IconButton>
-                ) : (
-                  <IconButton onClick={onVideoPress} radius="rounded-full">
-                    <BsFillPlayFill className="text-black text-2xl lg:text-4xl" />
-                  </IconButton>
-                )}
-                {isVideoMuted ? (
-                  <IconButton
-                    onClick={() => setIsVideoMuted(false)}
-                    radius="rounded-full"
-                  >
-                    <HiVolumeOff className="text-black text-2xl lg:text-4xl" />
-                  </IconButton>
-                ) : (
-                  <IconButton
-                    onClick={() => setIsVideoMuted(true)}
-                    radius="rounded-full"
-                  >
-                    <HiVolumeUp className="text-black text-2xl lg:text-4xl" />
-                  </IconButton>
-                )}
-              </div>
+              <>
+                <div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] lg:w-[280px] p-3">
+                  {playing ? (
+                    <IconButton onClick={onVideoPress} radius="rounded-full">
+                      <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={onVideoPress} radius="rounded-full">
+                      <BsFillPlayFill className="text-black text-2xl lg:text-4xl" />
+                    </IconButton>
+                  )}
+                  {isVideoMuted ? (
+                    <IconButton
+                      onClick={() => setIsVideoMuted(false)}
+                      radius="rounded-full"
+                    >
+                      <HiVolumeOff className="text-black text-2xl lg:text-4xl" />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => setIsVideoMuted(true)}
+                      radius="rounded-full"
+                    >
+                      <HiVolumeUp className="text-black text-2xl lg:text-4xl" />
+                    </IconButton>
+                  )}
+                </div>
+                <div className="absolute top-1 cursor-pointer right-1">
+                  <PopupMenu />
+                </div>
+              </>
             )}
           </div>
         ) : (
@@ -177,7 +182,6 @@ const MediaCard: NextPage<IProps> = ({
           </p>
         </Link>
       </div>
-      <PopupMenu />
     </div>
   )
 }
