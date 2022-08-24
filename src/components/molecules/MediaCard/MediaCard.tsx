@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { IconButton } from '@/components/atoms/IconButton/IconButton'
+import PopupMenu from '../PopupMenu/PopupMenu'
 import VibrantColorSwatch from '../VibrantColorSwatch/VibrantColorSwatch'
 
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
@@ -176,6 +177,7 @@ const MediaCard: NextPage<IProps> = ({
           </p>
         </Link>
       </div>
+      <PopupMenu />
     </div>
   )
 }
