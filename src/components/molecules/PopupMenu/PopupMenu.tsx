@@ -12,7 +12,7 @@ const PopupMenu = () => {
         aria-expanded={isShown}
         aria-haspopup="true"
         aria-controls="menuList"
-        onClick={() => setIsShown(true)}
+        onClick={() => setIsShown(!isShown)}
       >
         Toggle Menu
       </button>
