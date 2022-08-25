@@ -147,13 +147,17 @@ const MediaCard: NextPage<IProps> = ({
                   )}
                 </div>
                 <div className="absolute top-1 cursor-pointer right-1">
-                  <PopupMenu />
+                  <PopupMenu _id={_id} />
                 </div>
               </>
             )}
           </div>
         ) : (
-          <div className="lg:w-[600px] w-[200px] min-w-[220px] h-[300px] md:h-[400px] lg:h-[528px] relative rounded-3xl">
+          <div
+            className="lg:w-[600px] w-[200px] min-w-[220px] h-[300px] md:h-[400px] lg:h-[528px] relative rounded-3xl"
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+          >
             <Link href={`/detail/${_id}`}>
               <Image
                 layout="fill"
@@ -163,6 +167,11 @@ const MediaCard: NextPage<IProps> = ({
                 alt="user-profile"
               />
             </Link>
+            {isHover && (
+              <div className="absolute top-1 cursor-pointer right-1">
+                <PopupMenu _id={_id} />
+              </div>
+            )}
           </div>
         )}
       </div>

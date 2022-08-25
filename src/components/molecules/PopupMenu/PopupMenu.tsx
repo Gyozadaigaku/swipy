@@ -1,15 +1,29 @@
 import React, { useState, useRef } from 'react'
+import router from 'next/router'
 import useOutsideAlerter from '@/components/hooks/useOutsideAlerter'
 
 import ButtonWithLeadingIcon from '@/components/molecules/ButtonWithLeadingIcon/ButtonWithLeadingIcon'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
+import { client } from '../../../utils/client'
 import { IconButton } from '@/components/atoms/IconButton/IconButton'
 import { MdDelete } from 'react-icons/md'
 
-const PopupMenu = () => {
+const PopupMenu = ({ ...props }) => {
   const [isShown, setIsShown] = useState(false)
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef, setIsShown)
+
+  const deleteMedia = async () => {
+    client
+      .delete(props._id)
+      .then(() => {
+        console.log('Media deleted')
+      })
+      .catch((err) => {
+        console.error('Delete failed: ', err.message)
+      })
+    router.push('/')
+  }
 
   return (
     <div className="relative" ref={wrapperRef}>
@@ -34,6 +48,7 @@ const PopupMenu = () => {
           <ButtonWithLeadingIcon
             icon={<MdDelete aria-hidden="true" className="mr-1" />}
             label="Delete"
+            onClick={deleteMedia}
           />
         </li>
       </ul>
