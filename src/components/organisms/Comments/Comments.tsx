@@ -5,6 +5,7 @@ import { GoVerified } from 'react-icons/go'
 
 import useAuthStore from '../../../store/authStore'
 import NoResults from '../../molecules/NoResults/NoResults'
+import { Button } from '@/components/atoms/Button/Button'
 import { IUser } from '../../../types'
 
 interface IProps {
@@ -58,6 +59,28 @@ const Comments = ({
                             {user.userName}{' '}
                             <GoVerified className="text-blue-400" />
                           </p>
+                          <Button
+                            border="border-gray-300 border"
+                            className="px-2"
+                            fontSize="text-xs"
+                            fontWeight="font-normal"
+                            height="h-6"
+                            radius="rounded"
+                            width="w-12"
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            border="border-gray-300 border"
+                            className="px-2"
+                            fontSize="text-xs"
+                            fontWeight="font-normal"
+                            height="h-6"
+                            radius="rounded"
+                            width="w-12"
+                          >
+                            Edit
+                          </Button>
                         </div>
                       </Link>
                       <div>
