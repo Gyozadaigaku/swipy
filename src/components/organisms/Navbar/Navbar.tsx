@@ -76,6 +76,7 @@ const Navbar = () => {
                 fontWeight="font-semibold"
                 height="h-11"
                 hoverBgColor={'hover:bg-[#148BF3]'}
+                padding="px-6"
                 radius="rounded-full"
                 width="w-28"
               >

@@ -246,6 +246,7 @@ const Upload = () => {
               fontWeight="font-semibold"
               height="h-11"
               onClick={handleDiscard}
+              padding="px-6"
               radius="rounded"
               width="w-28 lg:w-44"
             >
@@ -261,6 +262,7 @@ const Upload = () => {
               height="h-11"
               hoverBgColor={'hover:bg-[#F51997]'}
               onClick={handlePost}
+              padding="px-6"
               radius="rounded"
               width="w-28 lg:w-44"
             >

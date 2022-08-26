@@ -9,6 +9,7 @@ type Props = {
   fontWeight?: string
   height?: string
   hoverBgColor?: string
+  padding?: string
   radius?: string
   width?: string
 }
@@ -22,8 +23,8 @@ export const Button = forwardRef<
       {...props}
       ref={ref}
       className={clsx(
-        'transition duration-200 px-6 text-sm',
-        `${props.bgColor} ${props.border} ${props.color} ${props.fontSize} ${props.fontWeight} ${props.height} ${props.hoverBgColor} ${props.radius} ${props.width}`
+        'transition duration-200',
+        `${props.bgColor} ${props.border} ${props.color} ${props.fontSize} ${props.fontWeight} ${props.height} ${props.hoverBgColor} ${props.padding} ${props.radius} ${props.width}`
       )}
     />
   )
